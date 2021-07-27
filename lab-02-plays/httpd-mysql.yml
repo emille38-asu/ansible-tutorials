@@ -1,12 +1,13 @@
+---
 - hosts: webservers # Host or group
   become: true
   vars:
     httpd_port: 8080
   tasks:
     - name: Install httpd # Name of task for debugging
-     yum: name=http state=present # Using module
+      yum: name=http state=present # Using module
     - name: Start httpd
-     service: name=httpd state=started
+      service: name=httpd state=started
 
 
 - hosts: dbservers # Host or group
@@ -15,6 +16,6 @@
     httpd_port: 8080
   tasks:
     - name: Install mysql # Name of task for debugging
-     yum: name=mysql state=present # Using module
+      yum: name=mysql state=present # Using module
     - name: Start mysql
-     service: name=mysql state=mysql
+      service: name=mysql state=mysql
