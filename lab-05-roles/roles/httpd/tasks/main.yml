@@ -1,6 +1,12 @@
 ---
 - name: Install httpd server
   yum: name=httpd state=present
+  when: ansible_distribution == "CentOS"
+
+
+- name: Install chrony
+  yum: name=chronyd state=present
+  when: ansible_distribution == "Ubuntu"
 
 - name: Start httpd
   service: name=httpd state=started enabled=yes
@@ -12,4 +18,9 @@
 
 - name: Flush handlers
   meta: flush_handlers
+
+- name: Copy the index files
+  template:
+    dest: /var/www/html/index.html
+    src: index.html
 
